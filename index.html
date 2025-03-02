@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line-Following Robot</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    
+    <!-- Progress Bar -->
+    <div id="progress-bar"></div>
+
+    <!-- Dark Mode Toggle -->
+    <button id="dark-mode-toggle">🌙 Dark Mode</button>
+
+    <!-- Sidebar Table of Contents -->
+    <nav class="sidebar">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#about">What is a Line-Following Robot?</a></li>
+            <li><a href="#components">Components Used</a></li>
+            <li><a href="#circuit">Circuit Diagram</a></li>
+            <li><a href="#code">Arduino Code</a></li>
+            <li><a href="#demo">Project Demo</a></li>
+            <li><a href="#applications">Real-World Applications</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+        <header>
+            <h1>Line-Following Robot Project</h1>
+            <p>Using Arduino, IR Sensors & Motor Control</p>
+        </header>
+
+        <section id="about">
+            <h2>What is a Line-Following Robot?</h2>
+            <p>A Line-Following Robot is an autonomous bot that follows a predefined path using sensors. 
+                It is widely used in industrial automation, military surveillance, and self-driving technology.</p>
+            <h3>🔧 How It Works:</h3>
+            <ol>
+                <li>**IR Sensors** detect black/white contrast to follow a path.</li>
+                <li>**Arduino** processes sensor data and controls motor speed.</li>
+                <li>**Motor Driver (L298N)** adjusts movement based on sensor feedback.</li>
+                <li>**If the bot veers off the track**, it corrects its direction automatically.</li>
+            </ol>
+        </section>
+
+        <section id="components">
+            <h2>Components Used</h2>
+            <ul>
+                <li>Arduino Uno</li>
+                <li>IR Sensors</li>
+                <li>DC Motors & Motor Driver (L298N)</li>
+                <li>9V Battery</li>
+            </ul>
+        </section>
+
+        <section id="circuit">
+            <h2>Circuit Diagram</h2>
+            <img src="circuitdiagram.jpg" alt="Circuit Diagram" id="circuit-img">
+        </section>
+
+        <section id="code">
+            <h2>Arduino Code</h2>
+            <button class="expand-btn">Show Code</button>
+            <pre class="code-container">
+                <code>
+#define LEFT_SENSOR A0
+#define RIGHT_SENSOR A1
+#define LEFT_MOTOR 5
+#define RIGHT_MOTOR 6
+#define LEFT_SENSOR A0
+#define RIGHT_SENSOR A1
+#define LEFT_MOTOR 5
+#define RIGHT_MOTOR 6
+#define LEFT_SENSOR A0
+#define RIGHT_SENSOR A1
+#define LEFT_MOTOR 5
+#define RIGHT_MOTOR 6
+void setup() {
+    pinMode(LEFT_SENSOR, INPUT);
+    pinMode(RIGHT_SENSOR, INPUT);
+    
+    pinMode(LEFT_MOTOR_FORWARD, OUTPUT);
+    pinMode(LEFT_MOTOR_BACKWARD, OUTPUT);
+    pinMode(RIGHT_MOTOR_FORWARD, OUTPUT);
+    pinMode(RIGHT_MOTOR_BACKWARD, OUTPUT);
+
+    Serial.begin(9600);
+}
+void loop() {
+    int leftSensor = digitalRead(LEFT_SENSOR);
+    int rightSensor = digitalRead(RIGHT_SENSOR);
+
+    Serial.print("Left Sensor: ");
+    Serial.print(leftSensor);
+    Serial.print(" | Right Sensor: ");
+    Serial.println(rightSensor);
+
+    // Case 1: Both sensors on the line → Move Forward
+    if (leftSensor == 0 && rightSensor == 0) {
+        moveForward();
+    }
+    // Case 2: Left sensor off the line → Turn Right
+    else if (leftSensor == 1 && rightSensor == 0) {
+        turnRight();
+    }
+    // Case 3: Right sensor off the line → Turn Left
+    else if (leftSensor == 0 && rightSensor == 1) {
+        turnLeft();
+    }
+    // Case 4: Both sensors off the line → Stop (or can implement a recovery mechanism)
+    else {
+        stopMotors();
+    }
+}
+
+// Function to move forward
+void moveForward() {
+    digitalWrite(LEFT_MOTOR_FORWARD, HIGH);
+    digitalWrite(LEFT_MOTOR_BACKWARD, LOW);
+    digitalWrite(RIGHT_MOTOR_FORWARD, HIGH);
+    digitalWrite(RIGHT_MOTOR_BACKWARD, LOW);
+}
+
+// Function to turn right
+void turnRight() {
+    digitalWrite(LEFT_MOTOR_FORWARD, HIGH);
+    digitalWrite(LEFT_MOTOR_BACKWARD, LOW);
+    digitalWrite(RIGHT_MOTOR_FORWARD, LOW);
+    digitalWrite(RIGHT_MOTOR_BACKWARD, LOW);
+}
+
+// Function to turn left
+void turnLeft() {
+    digitalWrite(LEFT_MOTOR_FORWARD, LOW);
+    digitalWrite(LEFT_MOTOR_BACKWARD, LOW);
+    digitalWrite(RIGHT_MOTOR_FORWARD, HIGH);
+    digitalWrite(RIGHT_MOTOR_BACKWARD, LOW);
+}
+
+// Function to stop
+void stopMotors() {
+    digitalWrite(LEFT_MOTOR_FORWARD, LOW);
+    digitalWrite(LEFT_MOTOR_BACKWARD, LOW);
+    digitalWrite(RIGHT_MOTOR_FORWARD, LOW);
+    digitalWrite(RIGHT_MOTOR_BACKWARD, LOW);
+}
+                </code>
+            </pre>
+        </section>
+
+        <section id="demo">
+            <h2>Project Demo</h2>
+            <video width="400" controls>
+                <source src="line following bot.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+
+        <section id="applications">
+            <h2>Real-World Applications</h2>
+            <ul>
+                <li>Autonomous Military Vehicles</li>
+                <li>Surveillance Robots</li>
+                <li>Rescue Missions</li>
+            </ul>
+        </section>
+    </div>
+</body>
+</html>

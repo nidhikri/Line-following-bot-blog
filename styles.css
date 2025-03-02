@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap');
+
+body {
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    background: linear-gradient(to right, #0F2027, #203A43, #2C5364);
+    color: #ffffff;
+    transition: background 0.3s, color 0.3s;
+    scroll-behavior: smooth;
+}
+
+/* Dark Mode */
+.dark-mode {
+    background: linear-gradient(to right, #1e1e1e, #2a2a2a);
+    color: #f0f0f0;
+}
+
+#progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 5px;
+    background: #f57c00;
+    width: 0%;
+    transition: width 0.3s;
+}
+
+/* Sidebar */
+/* Sidebar Styling */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #232526;
+    color: white;
+    padding: 20px;
+    border-right: 3px solid #f57c00;
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+}
+
+/* Sidebar Title */
+.sidebar h2 {
+    text-align: center;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    color: #f57c00;
+    margin-bottom: 15px;
+}
+
+/* Sidebar Links */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 12px 0;
+}
+
+.sidebar ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+    padding: 12px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    font-size: 16px;
+}
+
+/* Highlight on Hover */
+.sidebar ul li a:hover {
+    background: #f57c00;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Active Section Indicator */
+.sidebar ul li a.active {
+    background: #f57c00;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Content Offset to Prevent Overlap */
+.content {
+    margin-left: 270px;  /* Matches sidebar width */
+    padding: 20px;
+    width: 100%;
+}
+
+
+/* Content */
+.content {
+    margin-left: 280px;
+    padding: 20px;
+    width: 100%;
+}
+
+/* Sections */
+section {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Dark Mode Toggle */
+#dark-mode-toggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    padding: 10px;
+    background: #f57c00;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+/* Circuit Image */
+#circuit-img {
+    width: 100%;
+    max-width: 450px;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+#circuit-img:hover {
+    transform: scale(1.1);
+}
+
